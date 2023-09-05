@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'todo/base.html' %}
+
+{% block header %}
+<h1>Todo List</h1>
+<p>今日のタスクを作成しましょう！</p>
+<p><a class="btn btn-primary" href="{% url 'create' %}">新規作成</a></p>
+{%endblock header %}
+
+{% block content %}
+<div class="shadow-sm p-m mb-5 bg-white rounded">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">title</th>
+                <th scope="col">deadline</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.deadline }}</td>
+                <td>
+                    <a href="{% url 'detail' task.pk %}">詳細</a>
+                    <a href="{% url 'update' task.pk %}">編集</a>
+                    <a href="{% url 'delete' task.pk %}">削除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
